@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jondo\Jondo.csproj" />
+    <ProjectReference Include="..\..\src\Jondo\Jondo.csproj" />
   </ItemGroup>
 
 </Project>
