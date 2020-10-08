@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jondo", "src\Jondo\Jondo.csproj", "{1B08D3E0-9E8B-47CB-8A45-F15D618E311E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE5BF5F2-87C1-4599-97B2-1594DAEB0A6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B08D3E0-9E8B-47CB-8A45-F15D618E311E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B08D3E0-9E8B-47CB-8A45-F15D618E311E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B08D3E0-9E8B-47CB-8A45-F15D618E311E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B08D3E0-9E8B-47CB-8A45-F15D618E311E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8916A1D6-5E44-4694-8AB6-47DA5A3AAD45} = {DE5BF5F2-87C1-4599-97B2-1594DAEB0A6D}
+		{1B08D3E0-9E8B-47CB-8A45-F15D618E311E} = {DE5BF5F2-87C1-4599-97B2-1594DAEB0A6D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74D321B8-D4BA-4209-82E5-5300AF782A8F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,181 @@
+﻿.j-grid {
+    width: 100%;
+    border: 1px solid #dedede;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.j-grid label.j-pagesize-label {
+    margin-right: 10px;
+}
+
+.j-grid > .j-grid-body > table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    position: relative;
+    table-layout:fixed;
+}
+
+
+.j-grid-total{
+    position:absolute;
+    right:25px;
+    bottom:10px
+}
+
+
+
+.j-grid > .j-grid-header-wrap > .j-grid-header > table > thead > tr > th[filtered] .jf-icon.jf-filter {
+    color: red;
+}
+
+.j-grid > .j-grid-body > table > tbody > tr > td {
+    padding: 5px 5px 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px solid #dedede;
+}
+
+.j-grid .j-grid-filterbox {
+    position:absolute;
+    border:1px solid #dedede;
+    background:white;
+    padding:10px;
+    display:none;
+    z-index:500;
+    top:35px;
+    right:-175px;
+    width:175px;
+}
+
+.j-grid-filterbox select,
+.j-grid-filterbox input[type='text'] {
+    margin-bottom: 5px;
+    width:100%;
+}
+
+
+.j-grid-filterbox a  {
+    margin-right:5px;
+}
+
+
+
+.j-grid-footer {
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #dedede;
+    display: inline-grid;
+    grid-template-columns: 600px auto auto;
+    position:relative;
+}
+
+
+.j-grid-footer .j-pager-item {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+    margin-right:5px;
+    cursor:pointer;
+    min-width : 35px;
+}
+
+
+.j-grid th[sort-direction='ascending']:after {
+    font-family: "jondo font";
+    content: "\f078";
+    font-size: 10px;
+    font-weight: 100;
+}
+
+
+.j-grid th[sort-direction='descending']:after {
+    font-family: "jondo font";
+    content: "\f077";
+    font-size: 10px;
+    font-weight: 100;
+}
+
+.j-grid-footer .j-pager-item.selected {
+
+    background: #dedede;
+}
+
+
+.j-grid th a.jf-filter{
+    position:absolute;
+    right:5px;
+}
+
+
+/*----------------------------------------------------------------------------*/
+
+
+
+.j-grid > .j-grid-header-wrap {
+    padding-right:17px;
+    position:relative;
+
+}
+
+.j-grid > .j-grid-header-wrap > .j-grid-header-wrap-toe {
+    padding-right: 17px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid #dedede;
+    background-color: #f8f9fa;
+}
+
+
+.j-grid > .j-grid-header-wrap > .j-grid-header {
+    overflow-x: hidden;
+}
+
+.j-grid > .j-grid-header-wrap > .j-grid-header > table {
+    table-layout: fixed;
+    width:100%;
+}
+
+.j-grid > .j-grid-header-wrap > .j-grid-header > table th {
+    padding: 5px 5px 5px 10px;
+    background: #f8f9fa;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+
+.j-grid > .j-grid-body > table {
+  table-layout:fixed;
+}
+
+
+.j-grid > .j-grid-header-wrap > .j-grid-header > table > thead > tr > th a {
+    color: #333;
+}
+
+.j-grid > .j-grid-header-wrap .j-grid-header > table > thead > tr > th a:hover {
+    text-decoration: none;
+}
+
+.j-grid > .j-grid-header-wrap > .j-grid-header > table > thead > tr > th > .col-seperator {
+    top: 0;
+    bottom: 0;
+    right: 0px;
+    width: 5px;
+    border-right: 1px solid #dedede;
+    position: absolute;
+    user-select: none;
+    cursor: col-resize;
+}
+
+.j-grid > .j-grid-body {
+    overflow: scroll;
+    width: 100%;
+}
+

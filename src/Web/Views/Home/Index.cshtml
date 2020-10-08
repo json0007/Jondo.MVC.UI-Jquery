@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<script>
+    $(function () {
+        $("#userGrid").data("jondoGrid").dataSource.read();
+    });
+</script>
+
+<h4>This is a demo of the jondo Grid</h4>
+
+
+@(Html.Jondo().Grid<User>()
+    .Id("userGrid")
+    .Columns(column =>
+    {
+        column.Add().BindTo(a => a.Id);
+        column.Add().BindTo(a => a.Username);
+        column.Add().BindTo(a => a.FirstName);
+        column.Add().BindTo(a => a.LastName);
+        column.Add().BindTo(a => a.Email);
+        column.Add().BindTo(a => a.PhoneNumber);
+        column.Add().BindTo(a => a.Birthday);
+        column.Add().BindTo(a => a.IsActive);
+
+    })
+    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
+    .Resizable(true)
+    .Sortable(true)
+    .Paging(new int[]{ 20, 50, 100}, 20)
+)
