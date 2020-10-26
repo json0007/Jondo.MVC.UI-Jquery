@@ -8,12 +8,15 @@ using System.Web;
 
 namespace Jondo.UI
 {
-    public abstract class WidgetBuilderBase<T> : WidgetBuilderBase where T : WidgetBuilderBase
+    public abstract class WidgetBuilderBase<T> : IHtmlContent where T : WidgetBase 
     {
-    }
+        protected readonly T Component;
 
-    public abstract class WidgetBuilderBase : IHtmlContent
-    {
+        public WidgetBuilderBase(T component)
+        {
+            Component = component;
+        }
+
         protected StringBuilder Builder = new StringBuilder();
 
         protected abstract void GenerateHtmlContent();

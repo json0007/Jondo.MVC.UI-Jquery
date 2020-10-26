@@ -24,11 +24,11 @@
 
 function jondoDropDownList(settings) {
     var settings = settings;
-    settings.components.jondoDropDownList = this
     jondoDropDownList = this;
 
     this.val = function (value) {
-        if (value)
-
+        if (value) {
+            return $("#" + settings.Id).val();
+        }
     }
 }
