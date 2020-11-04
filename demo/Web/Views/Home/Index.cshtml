@@ -1,4 +1,7 @@
-﻿@{
+﻿
+@model User;
+
+@{
     ViewData["Title"] = "Home";
     var items = new List<SelectListItem> {
 
@@ -15,31 +18,31 @@
         $("#userGrid").data("jondoGrid").dataSource.read();
     });
 </script>
+@(Html.Jondo().DropDownListFor(a => a.OptionId)
+                    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetDropDownList"))))
+<br />
+
 
 <h4>This is a demo of the jondo Grid</h4>
 
-
-        @(Html.Jondo().Grid<User>
+@(Html.Jondo().Grid<User>
             ()
             .Id("userGrid")
             .Columns(column =>
             {
-            column.Add().BindTo(a => a.Id);
-            column.Add().BindTo(a => a.Username);
-            column.Add().BindTo(a => a.FirstName);
-            column.Add().BindTo(a => a.LastName);
-            column.Add().BindTo(a => a.Email);
-            column.Add().BindTo(a => a.PhoneNumber);
-            column.Add().BindTo(a => a.Birthday);
-            column.Add().BindTo(a => a.IsActive);
+                column.Add().BindTo(a => a.Id);
+                column.Add().BindTo(a => a.Username);
+                column.Add().BindTo(a => a.FirstName);
+                column.Add().BindTo(a => a.LastName);
+                column.Add().BindTo(a => a.Email);
+                column.Add().BindTo(a => a.PhoneNumber);
+                column.Add().BindTo(a => a.Birthday);
+                column.Add().BindTo(a => a.IsActive);
 
             })
             .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
             .Resizable(true)
             .Sortable(true)
             .Paging(new int[]{ 20, 50, 100}, 20))
-
-        @(Html.Jondo().DropDownList()
-        .Name("foo")
-        .BindTo(items))
-            
+@*@(Html.Jondo().DropDownListFor(a => a.OptionId)
+    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetDropDownList"))))*@

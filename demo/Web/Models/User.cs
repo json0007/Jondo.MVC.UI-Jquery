@@ -17,6 +17,8 @@ namespace Web.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
+        public int OptionId { get; set; }
+
         public DateTime Birthday { get; set; }
 
         public static IEnumerable<User> Seed()

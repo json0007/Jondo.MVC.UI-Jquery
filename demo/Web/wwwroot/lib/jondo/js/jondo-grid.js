@@ -44,9 +44,9 @@ function jondoGrid(settings) {
         $.extend(requestData, routeData);
 
         $.get(url, requestData
-        ).then(result => {
-            settings.components.jondoGrid.dataSource.set(result.data, result.total);
-        })
+            ).then(result => {
+                settings.components.jondoGrid.dataSource.set(result.data, result.total);
+            })
 
         function createUrl() {
             return settings.dataSource.action.controller + "/" + settings.dataSource.action.method

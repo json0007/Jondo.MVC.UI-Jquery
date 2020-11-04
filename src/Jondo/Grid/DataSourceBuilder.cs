@@ -15,6 +15,13 @@ namespace Jondo.UI
             _component = component;
         }
 
+        public DataSourceBuilder Read(string Controller, string action)
+        {
+            _component.Action = new ControllerAction();
+            _component.Action = new ControllerAction { Controller = Controller, Method = action };
+            return this;
+        }
+
         public DataSourceBuilder Read(Action<ControllerActionBuilder> configurator)
         {
             _component.Action = new ControllerAction();

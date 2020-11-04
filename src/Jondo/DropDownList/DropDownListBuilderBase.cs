@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Jondo.UI
@@ -22,6 +23,19 @@ namespace Jondo.UI
             return (TBuilder)this;
         }
 
+        public TBuilder DataSource(Action<DataSourceBuilder> configure)
+        {
+            Component.DataSource = new DataSource();
+            var builder = new DataSourceBuilder(Component.DataSource);
+            configure.Invoke(builder);
+            return (TBuilder)this;
+        }
+
+        public TBuilder CascadeFrom(string name)
+        {
+            Component.Id = name;
+            return (TBuilder)this;
+        }
 
         public TBuilder BindTo(IEnumerable<SelectListItem> items)
         {
@@ -30,11 +44,14 @@ namespace Jondo.UI
         }
 
         protected override void GenerateHtmlContent()
-        {
+        {     
             Builder.Append($"<select id='{Component.Id}'>");
-            foreach(var item in Component.Items)
+            if (Component.Items != null)
             {
-                Builder.Append($"<option value='{item.Value}'>{item.Text}</option>");
+                foreach (var item in Component?.Items)
+                {
+                    Builder.Append($"<option value='{item.Value}'>{item.Text}</option>");
+                }
             }
             Builder.Append($"</select>");
         }
@@ -44,7 +61,7 @@ namespace Jondo.UI
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var dropdown = JsonConvert.SerializeObject(Component, settings);
             Builder.Append("<script>");
-            Builder.Append($"$('.jondo-grid').jondoDropDownList({dropdown})");
+            Builder.Append($"$('#{Component.Id}').jondoDropDownList({dropdown})");
             Builder.Append("</script>");
         }
     }

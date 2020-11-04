@@ -6,6 +6,6 @@ namespace Jondo.UI
 {
     public class DataSource
     {
-        public ControllerAction Action { get; set; }
+        public ControllerAction Action { get; set; } = new ControllerAction();
     }
 }

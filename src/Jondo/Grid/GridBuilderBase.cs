@@ -12,9 +12,6 @@ namespace Jondo.UI
         where TBuilder : GridBuilderBase<T, TComponent, TBuilder>
         where TComponent : Grid<T>
     {
-        private readonly TBuilder _builder;
-
-
         public GridBuilderBase(TComponent component) : base(component) { }
 
         public TBuilder Id(string id)
@@ -79,7 +76,7 @@ namespace Jondo.UI
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var grid = JsonConvert.SerializeObject(Component, settings);
             Builder.Append("<script>");
-            Builder.Append($"$('.jondo-grid').jondoGrid({grid})");
+            Builder.Append($"$('#{Component.Id}').jondoGrid({grid})");
             Builder.Append("</script>");
         }
     }

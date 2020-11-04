@@ -3,3 +3,23 @@
     opacity:.5;
     pointer-events:none;
 }
+
+a.button {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #dedede;
+    background: #e2e6ea;
+    color: #eee;
+    padding: 3px 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a.button:active {
+    background-color: #f8f9fa;
+}
+
+a.button:hover {
+    background-color: silver;
+}

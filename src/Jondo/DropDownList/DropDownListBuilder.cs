@@ -6,6 +6,6 @@ namespace Jondo.UI
 {
     public class DropDownListBuilder : DropDownListBuilderBase<DropDownList, DropDownListBuilder>
     {
-        public DropDownListBuilder() : base(new DropDownList()) { }
+        public DropDownListBuilder(DropDownList ddl) : base(ddl) { }
     }
 }

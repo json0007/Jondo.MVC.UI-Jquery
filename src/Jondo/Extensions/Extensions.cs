@@ -11,19 +11,31 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Jondo.UI
 {
     public static class Extensions
     {
-        public static Jondo Jondo(this IHtmlHelper helper)
+        public static Jondo<TModel> Jondo<TModel>(this IHtmlHelper<TModel> helper)
         {
-            return new Jondo();
+            return new Jondo<TModel>(helper);
         }
+
+   
     }
 
-    public class Jondo
+
+
+
+    public class Jondo<TModel>
     {
+
+        private readonly IHtmlHelper<TModel> _helper;
+        public Jondo(IHtmlHelper<TModel> helper)
+        {
+            _helper = helper;
+        }
         public GridBuilder<T> Grid<T>()
         {
             return new GridBuilder<T>();
@@ -31,7 +43,22 @@ namespace Jondo.UI
 
         public DropDownListBuilder DropDownList() 
         {
-            return new DropDownListBuilder();
+            return new DropDownListBuilder(new DropDownList());
         }
-    }
+
+        public DropDownListBuilder DropDownList(string name)
+        {
+            return new DropDownListBuilder(new DropDownList(name));
+        }
+
+        public DropDownListBuilder DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            if (!(expression.Body is MemberExpression memberEx))
+                throw new Exception("Invalid member expression");
+
+            var name = memberEx.Member.Name;
+            var value = expression.Compile().Invoke(_helper.ViewData.Model);
+            return new DropDownListBuilder(new DropDownList(name, value));
+        }
+    }           
 }
