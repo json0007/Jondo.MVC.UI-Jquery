@@ -8,18 +8,22 @@ a.button {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    border: solid 1px #dedede;
-    background: #e2e6ea;
+    border: solid 1px #f8f9fa;
+    background: #f8f9fa;
     color: #eee;
     padding: 3px 12px;
     text-decoration: none;
     cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-a.button:active {
-    background-color: #f8f9fa;
-}
 
-a.button:hover {
-    background-color: silver;
-}
+    a.button:hover {
+        background-color: #e2e6ea;
+        border-color: #dae0e5;
+    }
+
+    a.button:active {
+        background-color: #dae0e5;
+        border-color: #d3d9df;
+    }

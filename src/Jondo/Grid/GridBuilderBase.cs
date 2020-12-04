@@ -36,17 +36,25 @@ namespace Jondo.UI
             return (TBuilder)this;
         }
 
-        public TBuilder Resizable(bool enabled)
+        public TBuilder Resizable(bool enabled = true)
         {
             Component.Resizable = enabled;
             return (TBuilder)this;
         }
 
-        public TBuilder Sortable(bool enabled)
+        public TBuilder Sortable(bool enabled = true)
         {
             Component.Sortable = enabled;
             return (TBuilder)this;
         }
+
+        public TBuilder Scrollable(string height)
+        {
+            Component.Scrollable = true;
+            Component.Height = height;
+            return (TBuilder)this;
+        }
+
 
         public TBuilder Paging()
         {
@@ -65,6 +73,14 @@ namespace Jondo.UI
             };
             return (TBuilder)this;
         }
+
+        public TBuilder Filterable()
+        {
+            Component.Filterable = true;
+            return (TBuilder)this;
+        }
+
+        
 
         protected override void GenerateHtmlContent()
         {

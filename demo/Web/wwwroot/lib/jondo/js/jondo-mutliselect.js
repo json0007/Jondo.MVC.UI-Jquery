@@ -137,7 +137,7 @@ function jondoDropDownList(settings) {
         panel.className = "j-dropdown-panel";
         var button = document.createElement("a");
         button.className = "button"
-        button.innerHTML = "Select One..."
+        button.value = "Select one..."
 
         button.addEventListener("click", e => {
             e.stopPropagation();

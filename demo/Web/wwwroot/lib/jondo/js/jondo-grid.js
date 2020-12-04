@@ -216,7 +216,7 @@ function jondoGrid(settings) {
     }
 
     if (settings.resizable)
-        enableGridResizingNew(settings);
+        enableGridResizing(settings);
     if (settings.sortable)
         enableSorting(settings);
     if (settings.paging)
@@ -331,6 +331,9 @@ function jondoGrid(settings) {
                 colgroup.appendChild(col);
             }
 
+            if (settings.scrollable)
+                body.style = "height:" + settings.height;
+
             table.appendChild(colgroup);
             table.appendChild(tbody);
 
@@ -353,94 +356,94 @@ function jondoGrid(settings) {
 
   
 
-    function enableGridResizing(settings) {
+    //function enableGridResizing(settings) {
      
-        var row = settings.components.table.getElementsByTagName("tr")[0];
-        columns = row ? row.children : undefined;
-        if (!columns)
-            return;
+    //    var row = settings.components.table.getElementsByTagName("tr")[0];
+    //    columns = row ? row.children : undefined;
+    //    if (!columns)
+    //        return;
 
-        for (var i = 0; i < columns.length; i++) {
-            var seperator = createDiv();
-            columns[i].appendChild(seperator);
-            setListeners(seperator);
-        }
+    //    for (var i = 0; i < columns.length; i++) {
+    //        var seperator = createDiv();
+    //        columns[i].appendChild(seperator);
+    //        setListeners(seperator);
+    //    }
 
-        function setListeners(seperator) {
-            var pageX, curCol, curColWidth, table, tableWidth, curSeperator, dragging = false;
+    //    function setListeners(seperator) {
+    //        var pageX, curCol, curColWidth, table, tableWidth, curSeperator, dragging = false;
 
-            seperator.addEventListener('mousedown', function (e) {
-                e.stopPropagation();
-                dragging = true;
-                curSeperator = e.target;
-                curCol = e.target.parentElement;
-                table = e.target.closest("table");
-                pageX = e.pageX;
+    //        seperator.addEventListener('mousedown', function (e) {
+    //            e.stopPropagation();
+    //            dragging = true;
+    //            curSeperator = e.target;
+    //            curCol = e.target.parentElement;
+    //            table = e.target.closest("table");
+    //            pageX = e.pageX;
 
-                var padding = paddingDiff(curCol);
+    //            var padding = paddingDiff(curCol);
 
-                curColWidth = curCol.offsetWidth - padding;
-                tableWidth = table.offsetWidth;
-            });
+    //            curColWidth = curCol.offsetWidth - padding;
+    //            tableWidth = table.offsetWidth;
+    //        });
 
-            seperator.addEventListener('mouseover', function (e) {
-                e.target.style.borderRight = '2px solid #0000ff';
-            })
+    //        seperator.addEventListener('mouseover', function (e) {
+    //            e.target.style.borderRight = '2px solid #0000ff';
+    //        })
 
-            seperator.addEventListener('mouseout', function (e) {
-                if (!dragging)
-                    e.target.style.borderRight = '';
-            })
+    //        seperator.addEventListener('mouseout', function (e) {
+    //            if (!dragging)
+    //                e.target.style.borderRight = '';
+    //        })
 
-            document.addEventListener('mousemove', function (e) {
-                if (curCol) {
-                    var diffX = e.pageX - pageX;
-                    if (curColWidth + diffX <= 5)
-                        return;
-                    table.style.width = (tableWidth + (diffX)) + 'px';
-                    curCol.style.width = (curColWidth + diffX) + 'px';
-                }
-            });
+    //        document.addEventListener('mousemove', function (e) {
+    //            if (curCol) {
+    //                var diffX = e.pageX - pageX;
+    //                if (curColWidth + diffX <= 5)
+    //                    return;
+    //                table.style.width = (tableWidth + (diffX)) + 'px';
+    //                curCol.style.width = (curColWidth + diffX) + 'px';
+    //            }
+    //        });
 
-            document.addEventListener('mouseup', function (e) {
-                dragging = false;
-                if (curSeperator)
-                    curSeperator.style.borderRight = '';
-                curCol = undefined;
-                nxtCol = undefined;
-                pageX = undefined;
-                nxtColWidth = undefined;
-                curColWidth = undefined;
-                table = undefined;
-                curSeperator = undefined;
-            });
-        }
+    //        document.addEventListener('mouseup', function (e) {
+    //            dragging = false;
+    //            if (curSeperator)
+    //                curSeperator.style.borderRight = '';
+    //            curCol = undefined;
+    //            nxtCol = undefined;
+    //            pageX = undefined;
+    //            nxtColWidth = undefined;
+    //            curColWidth = undefined;
+    //            table = undefined;
+    //            curSeperator = undefined;
+    //        });
+    //    }
 
-        function createDiv() {
-            var div = document.createElement('div');
-            div.className = "col-seperator"
-            return div;
-        }
+    //    function createDiv() {
+    //        var div = document.createElement('div');
+    //        div.className = "col-seperator"
+    //        return div;
+    //    }
 
-        function paddingDiff(col) {
+    //    function paddingDiff(col) {
 
-            if (getStyleVal(col, 'box-sizing') == 'border-box') {
-                return 0;
-            }
+    //        if (getStyleVal(col, 'box-sizing') == 'border-box') {
+    //            return 0;
+    //        }
 
-            var padLeft = getStyleVal(col, 'padding-left');
-            var padRight = getStyleVal(col, 'padding-right');
-            return (parseInt(padLeft) + parseInt(padRight));
+    //        var padLeft = getStyleVal(col, 'padding-left');
+    //        var padRight = getStyleVal(col, 'padding-right');
+    //        return (parseInt(padLeft) + parseInt(padRight));
 
-        }
+    //    }
 
-        function getStyleVal(elm, css) {
-            return (window.getComputedStyle(elm, null).getPropertyValue(css))
-        }
-    };
+    //    function getStyleVal(elm, css) {
+    //        return (window.getComputedStyle(elm, null).getPropertyValue(css))
+    //    }
+    //};
 
 
-    function enableGridResizingNew(settings) {
+    function enableGridResizing(settings) {
 
         let header, row;
 
@@ -547,12 +550,24 @@ function jondoGrid(settings) {
         settings.paging.curRange = [1, 10];
         settings.paging.curSize = settings.paging.defaultSize;
 
+        let pageSize = document.createElement("span");
+
+        pageSize.innerHTML = "page size";
+
+        let dropdownContainer = document.createElement("span");
+
+        pageSize.innerHTML = "page size";
+
         let dropdown = createPageSizeSelect(settings);
+       
         let pager = document.createElement("span");
         pager.className = "j-pager";
 
+        dropdownContainer.appendChild(pageSize)
+        dropdownContainer.appendChild(dropdown)
+
         settings.components.footer.appendChild(pager);
-        settings.components.footer.appendChild(dropdown);
+        settings.components.footer.appendChild(dropdownContainer);
     }
     function enableSorting(settings) {
 
@@ -684,30 +699,69 @@ function jondoGrid(settings) {
         }
     }
     function createPageSizeSelect(settings) {
-        var container = document.createElement("span");
-        
-        var select = document.createElement("select");
-        for (var i = 0; i < settings.paging.pageSizes.length; i++) {
-            var o = document.createElement("option");
-            o.text = settings.paging.pageSizes[i];
-            o.value = settings.paging.pageSizes[i];
 
-            if (settings.paging.defaultSize == settings.paging.pageSizes[i])
-                o.selected = true;
-            select.appendChild(o);
+        var container = document.createElement("span");
+        container.className = "j-dropdown-list";
+
+        var panel = document.createElement("span");
+        panel.className = "j-dropdown-panel";
+
+   
+
+        var items = [{ text: "20", value: "20" }, { text: "50", value: "50" }, { text: "100", value: "100" }];
+
+        var button = document.createElement("a");
+        button.className = "button"
+        button.innerHTML = items[0].value;
+
+        button.addEventListener("click", e => {
+            e.stopPropagation();
+
+            if (!$(container).hasClass("active")) {
+
+                var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
+
+                if (height > window.innerHeight) {
+                    $(container).addClass("top");
+                }
+
+                $(container).addClass("active");
+                $(panel).slideDown(150);
+            }
+            else {
+                $(container).removeClass("active");
+                $(panel).slideUp(150, () => $(container).removeClass("top"));
+            }
+            $("body").click(() => {
+                $(container).removeClass("active");
+                $(panel).slideUp(150, () => $(container).removeClass("top"));
+            });
+        });
+
+        container.appendChild(button);
+        container.appendChild(panel);
+
+        var ul = document.createElement("ul");
+        for (var i = 0; i < items.length; i++) {
+          
+            var li = document.createElement("li");
+            li.value = items[i].value;
+            li.innerHTML = items[i].text;
+            ul.appendChild(li);
         }
 
-        select.addEventListener("change", (e) => {
-            settings.paging.curSize = e.currentTarget.options[e.currentTarget.selectedIndex].value;
-            $(e.currentTarget).closest(".j-grid").data("jondoGrid").dataSource.read();
-        })
 
-        var label = document.createElement("label");
-        label.className = "j-pagesize-label"
-        label.innerHTML = "page size"
-        container.appendChild(label);
-        container.appendChild(select);
+        panel.appendChild(ul);
+
+        $(ul).find("li").click(e => {
+            button.innerHTML = e.currentTarget.innerHTML;
+            settings.paging.curSize = e.currentTarget.value;
+            $(e.currentTarget).closest(".j-grid").data("jondoGrid").dataSource.read();
+        });
+
+
         return container;
+
     }
     function createUid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

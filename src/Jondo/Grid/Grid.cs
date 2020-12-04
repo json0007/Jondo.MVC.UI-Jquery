@@ -11,6 +11,8 @@ namespace Jondo.UI
         public DataSource DataSource { get; set; }
         public bool Resizable { get; set; }
         public bool Sortable { get; set; }
+        public string Height { get; set; }
+        public bool Scrollable { get; set; }
         public PageSettings Paging{get; set;}
         public bool Filterable { get; set; } = true;
     }

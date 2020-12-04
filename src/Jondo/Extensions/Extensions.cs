@@ -21,16 +21,10 @@ namespace Jondo.UI
         {
             return new Jondo<TModel>(helper);
         }
-
-   
     }
-
-
-
 
     public class Jondo<TModel>
     {
-
         private readonly IHtmlHelper<TModel> _helper;
         public Jondo(IHtmlHelper<TModel> helper)
         {

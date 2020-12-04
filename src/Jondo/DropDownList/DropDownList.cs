@@ -19,12 +19,14 @@ namespace Jondo.UI
         public DropDownList(string name, object value) 
         {
             Id = name;
-            Value = value;
+            SelectedValue = value;
         }
 
         public string Id { get; set; }
 
-        public object Value { get; set; }
+        public object SelectedValue { get; set; }
+
+        public Dictionary<string, string> Events { get; set; } = new Dictionary<string, string>();
 
         public DataSource DataSource { get; set; }
 

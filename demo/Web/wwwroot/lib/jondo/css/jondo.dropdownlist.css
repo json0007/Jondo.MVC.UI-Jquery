@@ -1,6 +1,6 @@
 ﻿.j-dropdown-list {
    position:relative;
-  margin:2px 0px;
+   margin:2px 0px;
 }
 
 .j-dropdown-list select {
@@ -13,14 +13,14 @@
     margin:0;
 }
 
-    .j-dropdown-list li {
-        text-align: left;
-        padding: 2px 5px;
-    }
+.j-dropdown-list li {
+    text-align: left;
+    padding: 2px 5px;
+}
 
 .j-dropdown-list li:hover {
     cursor:pointer;
-    background:#dedede;
+    background:#dae0e5;
 }
 
 .j-dropdown-list li.selected
@@ -28,14 +28,11 @@
     background: #dedede;
 }
 
-.j-dropdown-list.active a.button {
-    background-color: #f8f9fa;
-}
 
 .j-dropdown-list .j-dropdown-panel {
     display:none;
     left:0;
-    top:30px;
+    top:25px;
     right:0;
     z-index:100;
     position: absolute;
@@ -44,17 +41,21 @@
     border-radius: 5px 5px 5px 5px;
 }
 
-    .j-dropdown-list a:after {
-        content: "\f078";
-        font-family: 'jondo font';
-        font-size: 10px;
-        margin-left: 10px;
-    }
+.j-dropdown-list a:after {
+    content: "\f078";
+    font-family: 'jondo font';
+    font-size: 10px;
+    margin-left: 10px;
+}
 
+.j-dropdown-list.top .j-dropdown-panel {
+    bottom: 25px;
+    top:unset;
+}
 
-
-.j-dropdown-list.top.active .j-dropdown-panel {
-    bottom: 30px;
+.j-dropdown-list.active button:hover {
+    border: #f8f9fa;
+    background: #f8f9fa;
 }
 
 

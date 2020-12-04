@@ -18,9 +18,6 @@
         $("#userGrid").data("jondoGrid").dataSource.read();
     });
 </script>
-@(Html.Jondo().DropDownListFor(a => a.OptionId)
-                    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetDropDownList"))))
-<br />
 
 
 <h4>This is a demo of the jondo Grid</h4>
@@ -41,8 +38,9 @@
 
             })
             .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
-            .Resizable(true)
-            .Sortable(true)
+            .Resizable()
+            .Filterable()
+            .Sortable()
+            .Scrollable("calc(100% - 200px)")
             .Paging(new int[]{ 20, 50, 100}, 20))
-@*@(Html.Jondo().DropDownListFor(a => a.OptionId)
-    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetDropDownList"))))*@
+

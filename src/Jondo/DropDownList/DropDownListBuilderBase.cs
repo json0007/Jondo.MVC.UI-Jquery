@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Internal;
+﻿using Jondo.DropDownList;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Jondo.UI
 {
-    public class DropDownListBuilderBase<TComponent, TBuilder> : WidgetBuilderBase<TComponent>
+    public abstract class DropDownListBuilderBase<TComponent, TBuilder> : WidgetBuilderBase<TComponent>
         where TBuilder : DropDownListBuilderBase<TComponent, TBuilder>
         where TComponent : DropDownList
     {
@@ -40,6 +41,13 @@ namespace Jondo.UI
         public TBuilder BindTo(IEnumerable<SelectListItem> items)
         {
             Component.Items = items;
+            return (TBuilder)this;
+        }
+
+        public TBuilder Events(Action<DropDownListEventBuilder> builder)
+        {
+            var b = new DropDownListEventBuilder(Component.Events);
+            builder.Invoke(b);
             return (TBuilder)this;
         }
 
