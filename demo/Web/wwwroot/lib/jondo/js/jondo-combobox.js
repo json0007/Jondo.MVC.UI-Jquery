@@ -150,6 +150,7 @@ function jondoComboBox(settings) {
 
                 $(container).addClass("active");
                 $(panel).slideDown(150);
+
             }
             else {
                 $(container).removeClass("active");
