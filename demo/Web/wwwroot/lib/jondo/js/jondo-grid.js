@@ -706,13 +706,15 @@ function jondoGrid(settings) {
         var panel = document.createElement("span");
         panel.className = "j-dropdown-panel";
 
-   
-
-        var items = [{ text: "20", value: "20" }, { text: "50", value: "50" }, { text: "100", value: "100" }];
+        var items = settings.paging.pageSizes;
 
         var button = document.createElement("a");
         button.className = "button"
-        button.innerHTML = items[0].value;
+
+        if (!settings.paging.defaultSize)
+            button.innerHTML = settings.paging.defaultSize
+        else
+            button.innerHTML = items[0];
 
         button.addEventListener("click", e => {
             e.stopPropagation();
@@ -745,8 +747,8 @@ function jondoGrid(settings) {
         for (var i = 0; i < items.length; i++) {
           
             var li = document.createElement("li");
-            li.value = items[i].value;
-            li.innerHTML = items[i].text;
+            li.value = items[i];
+            li.innerHTML = items[i];
             ul.appendChild(li);
         }
 

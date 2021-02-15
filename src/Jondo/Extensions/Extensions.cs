@@ -40,6 +40,16 @@ namespace Jondo.UI
             return new DropDownListBuilder(new DropDownList());
         }
 
+        public ComboBoxBuilder ComboBox()
+        {
+            return new ComboBoxBuilder(new ComboBox());
+        }
+
+        public ComboBoxBuilder ComboBox(string name)
+        {
+            return new ComboBoxBuilder(new ComboBox(name));
+        }
+
         public DropDownListBuilder DropDownList(string name)
         {
             return new DropDownListBuilder(new DropDownList(name));

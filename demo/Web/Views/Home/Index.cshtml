@@ -12,35 +12,36 @@
         new SelectListItem("item 5", "5")
     };
 }
-
+<script src="~/lib/jondo/js/jondo-combobox.js"></script>
 <script>
     $(function () {
         $("#userGrid").data("jondoGrid").dataSource.read();
     });
 </script>
 
+@Html.Jondo().ComboBox("comboBox").DataSource(a => a.Read("Home", "GetDropDownList"))
+
 
 <h4>This is a demo of the jondo Grid</h4>
 
-@(Html.Jondo().Grid<User>
-            ()
-            .Id("userGrid")
-            .Columns(column =>
-            {
-                column.Add().BindTo(a => a.Id);
-                column.Add().BindTo(a => a.Username);
-                column.Add().BindTo(a => a.FirstName);
-                column.Add().BindTo(a => a.LastName);
-                column.Add().BindTo(a => a.Email);
-                column.Add().BindTo(a => a.PhoneNumber);
-                column.Add().BindTo(a => a.Birthday);
-                column.Add().BindTo(a => a.IsActive);
+@(Html.Jondo().Grid<User>()
+        .Id("userGrid")
+        .Columns(column =>
+        {
+            column.Add().BindTo(a => a.Id);
+            column.Add().BindTo(a => a.Username);
+            column.Add().BindTo(a => a.FirstName);
+            column.Add().BindTo(a => a.LastName);
+            column.Add().BindTo(a => a.Email);
+            column.Add().BindTo(a => a.PhoneNumber);
+            column.Add().BindTo(a => a.Birthday);
+            column.Add().BindTo(a => a.IsActive);
 
-            })
-            .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
-            .Resizable()
-            .Filterable()
-            .Sortable()
-            .Scrollable("calc(100% - 200px)")
-            .Paging(new int[]{ 20, 50, 100}, 20))
+        })
+        .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
+        .Resizable()
+        .Filterable()
+        .Sortable()
+        .Scrollable("400px")
+        .Paging(new int[]{ 20, 50, 100}, 20))
 

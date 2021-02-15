@@ -68,8 +68,9 @@
     padding: 10px;
     border-top: 1px solid #dedede;
     display: inline-grid;
-    grid-template-columns: 600px 120px auto;
-    position:relative;
+    grid-template-columns: auto 120px 100px;
+    position: relative;
+    height: 50px
 }
 
 
@@ -92,7 +93,6 @@
     font-weight: 100;
 }
 
-
 .j-grid th[sort-direction='descending']:after {
     font-family: "jondo font";
     content: "\f077";
@@ -104,7 +104,6 @@
 
     background: #dedede;
 }
-
 
 .j-grid th a.jf-filter{
     position:absolute;
