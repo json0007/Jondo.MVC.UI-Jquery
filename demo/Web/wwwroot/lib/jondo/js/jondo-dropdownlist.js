@@ -36,18 +36,13 @@ function jondoDropDownList(settings) {
     
     this.dataSource.set = function (data)
     {
+        dropDownList.Items = data;
         this.data = data;
-        dropDownList.components.select.innerHTML = "";
         dropDownList.components.li = []
         var panel = document.getElementById(settings.id).parentElement.getElementsByClassName("j-dropdown-panel")[0];
         var ul = document.createElement("ul");
         for(var i = 0; i < data.length; i++)
         {
-            var option = document.createElement("option");
-            option.text = data[i].text;
-            option.value = data[i].value;
-            dropDownList.components.select.appendChild(option);
-
             var li = document.createElement("li");
             li.value = data[i].value;
             li.innerHTML = data[i].text;
@@ -58,15 +53,15 @@ function jondoDropDownList(settings) {
 
         $(dropDownList.components.li).click(e => {
             dropDownList.val($(e.currentTarget).attr("value"));
-
         });
+
         panel.innerHTML = ""; 
         panel.appendChild(ul);
 
         if (!dropDownList.selectedValue)
             dropDownList.selectedValue = data[0].value;
 
-        dropDownList.val(dropDownList.selectedValue, true);
+        dropDownList.val(dropDownList.selectedValue);
     };
 
     this.dataSource.read = function () {
@@ -82,36 +77,26 @@ function jondoDropDownList(settings) {
         }
     }
 
-    this.val = function (value, ignoreChange) {
+  
+    this.val = function (value, ignoreChangeEvent) {
+
         if (!value) {
             return dropDownList.selectedValue
         }
-        else
-        {
-            var select = document.getElementById(settings.id);
-            if (dropDownList.dataSource.data.filter(d => d.value == value).length > 0)
-            {
-                dropDownList.selectedValue = value;
-                select.value = value;
-            }
-            else
-            {
-                dropDownList.selectedValue = dropDownList.data[0].value;
-                document.getElementById(settings.id).value = dropDownList.data[0].value;
-            }
 
-            var selected = dropDownList.components.li.filter(a => a.value == dropDownList.selectedValue)[0];
+        let listItem = dropDownList.components.li.filter(d => d.value == value)[0];
+        let dataIem = dropDownList.dataSource.data.filter(d => d.value == value)[0];
+
+        if (dataIem) {
+            dropDownList.selectedValue = dataIem.value;
+            dropDownList.components.input.value = dataIem.value;
+            dropDownList.components.displayInput.value = dataIem.text;
             $(dropDownList.components.li).removeClass("selected");
-            $(dropDownList.components.selected).addClass("selected");
-            dropDownList.components.button.innerHTML = selected.innerHTML;
-            $(dropDownList.components.container).removeClass("active");
-            $(dropDownList.components.container).removeClass("top");
-            $(dropDownList.components.panel).hide();
-
-            if(!ignoreChange)
-                $(select).change();
+            $(listItem).addClass("selected");
         }
+        return dropDownList;
     }
+
 
     if (settings.dataSource)
         dropDownList.dataSource.read();
@@ -127,19 +112,41 @@ function jondoDropDownList(settings) {
     }
 
     function CreateUI(settings, dropDownList) {
-    
-        var select = document.getElementById(settings.id);
 
-        var parent = select.parentElement;
-        var container = document.createElement("span");
-        container.className = "j-dropdown-list";
-        var panel = document.createElement("span");
-        panel.className = "j-dropdown-panel";
-        var button = document.createElement("a");
-        button.className = "button"
-        button.innerHTML = "Select One..."
+        dropDownList.components.input = document.getElementById(settings.id);
+        dropDownList.components.container = dropDownList.components.input.parentElement;
+        dropDownList.components.panel = dropDownList.components.container.getElementsByClassName("j-dropdown-panel")[0];
+        dropDownList.components.displayInput = dropDownList.components.container.getElementsByClassName("j-dropdown-input")[0];
 
-        button.addEventListener("click", e => {
+        let displayInput = dropDownList.components.displayInput
+        let container = dropDownList.components.container;
+        let panel = dropDownList.components.panel;
+
+        displayInput.addEventListener("keydown", e => {
+            var item = dropDownList.Items.filter(a => a.value === dropDownList.selectedValue)[0];
+            index = dropDownList.Items.indexOf(item);
+
+            
+
+            if (event.keyCode === 40) {
+                if (index > dropDownList.Items.length)
+                    return;
+                dropDownList.val(dropDownList.Items[index +1 ].value)
+            }
+            else if (event.keyCode === 38) {
+                if (index == 0)
+                    return;
+                dropDownList.val(dropDownList.Items[index - 1].value)
+            }
+            else if (event.keyCode === 9) {
+                $(container).removeClass("active");
+                $(panel).slideUp(150, () => $(container).removeClass("top"));
+            }
+          
+
+        });
+
+        displayInput.addEventListener("click", e => {
             e.stopPropagation();
           
             if (!$(container).hasClass("active")) {
@@ -156,32 +163,14 @@ function jondoDropDownList(settings) {
             else {
                 $(container).removeClass("active");
                 $(panel).slideUp(150, () => $(container).removeClass("top"));
-            }
-            $("body").click(() => {
-                $(container).removeClass("active");
-                $(panel).slideUp(150, () => $(container).removeClass("top"));
-            });
+            }  
         });
 
-        if (settings.events && settings.events.onselect) {
-            var fn = window[settings.events.onselect];
-            if (typeof fn === "function")
-                $(select).change(e => {
-                    e.dropDownList = dropDownList;
-                    fn(e)
-                });
-        }
+        $("body").click(() => {
+            $(container).removeClass("active");
+            $(panel).slideUp(150, () => $(container).removeClass("top"));
+        });
 
-        container.appendChild(button);
-        container.appendChild(panel);
-
-        parent.replaceChild(container, select);
-        container.appendChild(select);
-
-        dropDownList.components.button = button;
-        dropDownList.components.select = select;
-        dropDownList.components.panel = panel;
-        dropDownList.components.container = container;
     }
 
 

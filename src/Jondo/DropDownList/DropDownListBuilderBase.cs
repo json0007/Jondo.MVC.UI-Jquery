@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 
 namespace Jondo.UI
@@ -52,16 +53,28 @@ namespace Jondo.UI
         }
 
         protected override void GenerateHtmlContent()
-        {     
-            Builder.Append($"<select id='{Component.Id}'>");
+        {
+
+
+            var selectectitem = Component.Items?.FirstOrDefault(a => a.Value == Component.SelectedValue.ToString());
+            Builder.Append("<span class='j-dropdown-list'>");
+            Builder.Append("<span class='j-dropdown-container'>");
+            Builder.Append($@"<input type='button' class='j-dropdown-input' value='{selectectitem?.Text ?? " "}'\>");
+            Builder.Append($@"<input style='display:none' id='{Component.Id}' value='{selectectitem?.Value ?? ""}'\>");
+            Builder.Append("<span class='j-dropdown-panel'>");
+
             if (Component.Items != null)
             {
-                foreach (var item in Component?.Items)
+                Builder.Append("<span class='j-dropdown-panel'>");
+                foreach (var item in Component.Items)
                 {
-                    Builder.Append($"<option value='{item.Value}'>{item.Text}</option>");
+                    Builder.Append($@"<li value='{item.Value}'>{item.Text}</li>");
                 }
+                Builder.Append(@"</ul>");
             }
-            Builder.Append($"</select>");
+            Builder.Append(@"</span>");
+            Builder.Append(@"</span>");
+            Builder.Append(@"</span>");
         }
 
         protected override void GenerateInitailizationScript()

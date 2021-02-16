@@ -19,8 +19,8 @@ namespace Jondo.UI
 
         protected override void GenerateHtmlContent()
         {
-            var selectectitem = Component.Items?.FirstOrDefault(a => a.Value == Component.SelectedValue);
-            Builder.Append("<span class='j-combobox j-dropdown-list'>");
+            var selectectitem = Component.Items?.FirstOrDefault(a => a.Value == Component.SelectedValue.ToString());
+            Builder.Append("<span class='j-combobox'>");
             Builder.Append("<span class='j-dropdown-container'>");
             Builder.Append($@"<input type='text' class='j-dropdown-input' value='{selectectitem?.Text ?? ""}'\>");
             Builder.Append($@"<input style='display:none' id='{Component.Id}' value='{selectectitem?.Value ?? ""}'\>");
