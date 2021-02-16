@@ -7,7 +7,7 @@ namespace Jondo.UI
 {
     public class FilterDescriptor
     {
-        public FilterType Type { get; set; }
+        public Enums.FilterType Type { get; set; }
         public string Value { get; set; }
     }
 }

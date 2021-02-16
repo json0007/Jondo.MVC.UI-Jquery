@@ -39,11 +39,11 @@ namespace Web.Controllers
         public IActionResult GetDropDownList()
         {
             return Ok(new List<SelectListItem> { 
-                new SelectListItem("option1","1"),
-                new SelectListItem("option2","2"),
-                new SelectListItem("option3","3"),
-                new SelectListItem("option4","4"),
-                new SelectListItem("option5","5")
+                new SelectListItem("Antonia Banderas","1"),
+                new SelectListItem("Sandra Bullok","2"),
+                new SelectListItem("Tom Brady","3"),
+                new SelectListItem("Emillio Estivez","4"),
+                new SelectListItem("Karreem Hunt","5"),
             });
         }
 
@@ -51,5 +51,9 @@ namespace Web.Controllers
         {
             return View();
         }
+
+        
+
+
     }
 }

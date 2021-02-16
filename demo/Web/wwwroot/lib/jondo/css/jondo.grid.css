@@ -219,12 +219,7 @@
     border-radius: 5px 5px 5px 5px;
 }
 
-.j-dropdown-list a:after {
-    content: "\f078";
-    font-family: 'jondo font';
-    font-size: 10px;
-    margin-left: 10px;
-}
+
 
 .j-dropdown-list.top .j-dropdown-panel {
     bottom: 15px;

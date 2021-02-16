@@ -1,34 +1,34 @@
-﻿.j-dropdown-list {
+﻿.j-combobox {
    position:relative;
    margin:2px 0px;
 }
 
-.j-dropdown-list select {
+.j-combobox select {
     display: none;
 }
 
-.j-dropdown-list ul {
+.j-combobox ul {
     list-style: none;
     padding:0;
     margin:0;
 }
 
-.j-dropdown-list li {
+.j-combobox li {
     text-align: left;
     padding: 2px 5px;
 }
 
-.j-dropdown-list li:hover {
+.j-combobox li:hover {
     cursor:pointer;
     background:#dae0e5;
 }
 
-.j-dropdown-list li.selected
+.j-combobox li.selected
 {
     background: #dedede;
 }
 
-.j-dropdown-list .j-dropdown-panel {
+.j-combobox .j-dropdown-panel {
     display:none;
     left:0;
     top:25px;
@@ -43,28 +43,26 @@
 
 }
 
-
-
-.j-dropdown-list .j-dropdown-container:after {
+.j-combobox .j-dropdown-container:after {
     content: "\f078";
     font-family: 'jondo font';
     font-size: 10px;
-    position: absolute;
-    top: 5px;
-    right: 10px;
+    position:absolute;
+    top:5px; 
+    right:10px;
 }
 
-.j-dropdown-list.top {
+.j-combobox.top {
     bottom: 25px;
     top: unset;
 }
 
-.j-dropdown-list.active button:hover {
+.j-combobox.active button:hover {
     border: #f8f9fa;
     background: #f8f9fa;
 }
 
-.j-dropdown-list input {
+.j-combobox input {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -77,18 +75,18 @@
 }
 
 
-.j-dropdown-list input:hover {
+.j-combobox input:hover {
     background-color: #e2e6ea;
     border-color: #dae0e5;
 }
 
-.j-dropdown-list input:active {
+.j-combobox input:active {
     background-color: #dae0e5;
     border-color: #d3d9df;
 }
 
-    .j-dropdown-list input:focus {
-       outline: none;
-    }
+.j-combobox input:focus {
+    outline: none;
+}
 
 

@@ -9,14 +9,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Web.Data;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IHostEnvironment Environment { get; }
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -24,8 +27,14 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
+            var mvcBuilder = services.AddControllersWithViews();
+
+            if (Environment.IsDevelopment())
+                mvcBuilder.AddRazorRuntimeCompilation();
+
             services.AddTransient<IDataStore, DataStore>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,8 @@ namespace Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }
