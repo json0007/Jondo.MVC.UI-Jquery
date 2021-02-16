@@ -6,8 +6,8 @@ namespace Jondo.UI.Enums
 {
     public enum FilterType
     {
+        Contains = 0,
         Equals = 1,
-        Contains = 2,
         NotEqual = 3,
         NotContains = 4
     }

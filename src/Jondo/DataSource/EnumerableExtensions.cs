@@ -63,19 +63,19 @@ namespace Jondo.UI
 
             switch (descriptor.Type)
             {
-                case FilterType.Equals:
+                case Enums.FilterType.Equals:
                     {
                        return enumerable.Where(a => property.GetValue(a).ToString().ToLower() == descriptor.Value);
                     }
-                case FilterType.NotEqual:
+                case Enums.FilterType.NotEqual:
                     {
                         return enumerable.Where(a => property.GetValue(a).ToString().ToLower() != descriptor.Value);
                     }
-                case FilterType.Contains:
+                case Enums.FilterType.Contains:
                     {
                         return enumerable.Where(a => property.GetValue(a).ToString().ToLower().Contains(descriptor.Value));
                     }
-                case FilterType.NotContains:
+                case Enums.FilterType.NotContains:
                     {
                         return enumerable.Where(a => !property.GetValue(a).ToString().ToLower().Contains(descriptor.Value));
                     }

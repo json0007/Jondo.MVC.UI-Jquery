@@ -19,8 +19,8 @@
     });
 </script>
 
-@Html.Jondo().ComboBox("comboBox").DataSource(a => a.Read("Home", "GetDropDownList"))
-
+@*@Html.Jondo().ComboBoxFor(a => a.OptionId).FilterType(FilterTypes.Contains).DataSource(a => a.Read("Home", "GetDropDownList"))*@
+@Html.Jondo().DropDownListFor(a => a.OptionId).DataSource(a => a.Read("Home", "GetDropDownList"))
 
 <h4>This is a demo of the jondo Grid</h4>
 
@@ -44,4 +44,3 @@
         .Sortable()
         .Scrollable("400px")
         .Paging(new int[]{ 20, 50, 100}, 20))
-

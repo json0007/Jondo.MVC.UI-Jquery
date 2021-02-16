@@ -50,6 +50,17 @@ namespace Jondo.UI
             return new ComboBoxBuilder(new ComboBox(name));
         }
 
+        public ComboBoxBuilder ComboBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            if (!(expression.Body is MemberExpression memberEx))
+                throw new Exception("Invalid member expression");
+
+            var name = memberEx.Member.Name;
+            var value = expression.Compile().Invoke(_helper.ViewData.Model);
+        
+            return new ComboBoxBuilder(new ComboBox(name, value));
+        }
+
         public DropDownListBuilder DropDownList(string name)
         {
             return new DropDownListBuilder(new DropDownList(name));
