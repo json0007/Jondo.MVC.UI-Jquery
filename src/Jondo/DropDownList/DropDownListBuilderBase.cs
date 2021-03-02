@@ -25,6 +25,19 @@ namespace Jondo.UI
             return (TBuilder)this;
         }
 
+        public TBuilder Animation(Action<AnimationBuilder> config)
+        {
+            var builder = new AnimationBuilder(Component.InAnimation, Component.OutAnimation);
+            config.Invoke(builder);
+            return (TBuilder)this;
+        }
+
+        public TBuilder AnimationSpeed(int speed) {
+            Component.AnimationSpeed = speed;
+            return (TBuilder)this;
+        }
+
+
         public TBuilder DataSource(Action<DataSourceBuilder> configure)
         {
             Component.DataSource = new DataSource();

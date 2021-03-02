@@ -80,6 +80,11 @@
     border-color: #dae0e5;
 }
 
+.j-combobox input:focus {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
 .j-combobox input:active {
     background-color: #dae0e5;
     border-color: #d3d9df;

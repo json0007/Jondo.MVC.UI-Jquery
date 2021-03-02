@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jondo.Events
+namespace Jondo.UI
 {
-    //public class Event : Dictionary<string, string>();
-    //{
-    //}
+    public class Events : Dictionary<string, string>
+    {
+    }
 }

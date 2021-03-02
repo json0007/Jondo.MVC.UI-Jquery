@@ -14,33 +14,40 @@
 }
 <script src="~/lib/jondo/js/jondo-combobox.js"></script>
 <script>
-    $(function () {
-        $("#userGrid").data("jondoGrid").dataSource.read();
-    });
+    function DoSomething() {
+        alert("bitch");
+    }
 </script>
-
-@*@Html.Jondo().ComboBoxFor(a => a.OptionId).FilterType(FilterTypes.Contains).DataSource(a => a.Read("Home", "GetDropDownList"))*@
-@Html.Jondo().DropDownListFor(a => a.OptionId).DataSource(a => a.Read("Home", "GetDropDownList"))
+<form asp-action="DoWork" method="post">
+    @(Html.Jondo().ComboBoxFor(a => a.OptionId)
+    .FilterType(FilterTypes.Contains)
+    .Animation(a => a.FadeIn(150).SlideOut(150))
+    .DataSource(a => a.Read("Home", "GetDropDownList")))
+    @(Html.Jondo().DropDownList("ddl")
+    .Animation(a => a.FadeIn(150).SlideOut(150))
+    .DataSource(a => a.Read("Home", "GetDropDownList").Events(a => a.OnChange("DoSomething"))))
+    <input type="submit" value="submit"/>
+</form>
 
 <h4>This is a demo of the jondo Grid</h4>
 
 @(Html.Jondo().Grid<User>()
-        .Id("userGrid")
-        .Columns(column =>
-        {
-            column.Add().BindTo(a => a.Id);
-            column.Add().BindTo(a => a.Username);
-            column.Add().BindTo(a => a.FirstName);
-            column.Add().BindTo(a => a.LastName);
-            column.Add().BindTo(a => a.Email);
-            column.Add().BindTo(a => a.PhoneNumber);
-            column.Add().BindTo(a => a.Birthday);
-            column.Add().BindTo(a => a.IsActive);
+    .Id("userGrid")
+    .Columns(column =>
+    {
+        column.Add().BindTo(a => a.Id);
+        column.Add().BindTo(a => a.Username);
+        column.Add().BindTo(a => a.FirstName);
+        column.Add().BindTo(a => a.LastName);
+        column.Add().BindTo(a => a.Email);
+        column.Add().BindTo(a => a.PhoneNumber);
+        column.Add().BindTo(a => a.Birthday);
+        column.Add().BindTo(a => a.IsActive);
 
-        })
-        .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
-        .Resizable()
-        .Filterable()
-        .Sortable()
-        .Scrollable("400px")
-        .Paging(new int[]{ 20, 50, 100}, 20))
+    })
+    .DataSource(a => a.Read(read => read.Controller("Home").Action("GetUsers")))
+    .Resizable()
+    .Filterable()
+    .Sortable()
+    .Scrollable("400px")
+    .Paging(new int[]{ 20, 50, 100}, 20))

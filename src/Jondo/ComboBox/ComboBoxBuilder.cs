@@ -22,8 +22,8 @@ namespace Jondo.UI
             var selectectitem = Component.Items?.FirstOrDefault(a => a.Value == Component.SelectedValue.ToString());
             Builder.Append("<span class='j-combobox'>");
             Builder.Append("<span class='j-dropdown-container'>");
-            Builder.Append($@"<input type='text' class='j-dropdown-input' value='{selectectitem?.Text ?? ""}'\>");
-            Builder.Append($@"<input style='display:none' id='{Component.Id}' value='{selectectitem?.Value ?? ""}'\>");
+            Builder.Append($@"<input type='text' class='j-dropdown-input' value='{selectectitem?.Text ?? ""}'>");
+            Builder.Append($@"<input style='display:none' id='{Component.Id}' name='{Component.Id}' value='{selectectitem?.Value ?? ""}'\>");
             Builder.Append("<span class='j-dropdown-panel'>");
 
             if (Component.Items != null)

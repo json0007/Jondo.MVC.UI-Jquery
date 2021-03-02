@@ -33,12 +33,14 @@ function jondoComboBox(settings) {
     this.components = {};
     this.components.li = [];
     this.selectedValue = settings.selectedValue;
-    CreateUI(settings, this);
-    this.events = settings.events;
+    
+    CreateEvents(settings);
+    CreateUI(settings);
 
     this.dataSource.set = function (data)
     {
         this.data = data;
+        settings.items = data;
         settings.components.li = []
         var ul = document.createElement("ul");
         for(var i = 0; i < data.length; i++)
@@ -48,19 +50,22 @@ function jondoComboBox(settings) {
             li.innerHTML = data[i].text;
             ul.appendChild(li);
             settings.components.li.push(li);
+            li.addEventListener("mousedown", settings.events.listitem_mousedown);
+            li.addEventListener("click", settings.events.listitem_click);
+            li.addEventListener("mouseup", settings.events.listitem_mouseup);
         }
 
         settings.components.panel.innerHTML = ""; 
         settings.components.panel.appendChild(ul);
 
-        if (!comboBox.selectedValue)
-            comboBox.selectedValue = data[0].value;
+        comboBox.selectedValue = comboBox.selectedValue ?? data[0].value;
 
         comboBox.val(comboBox.selectedValue, true);
 
-        $(settings.components.li).click(e => {
-            comboBox.val(e.currentTarget.value);
-        });
+        if (settings.dataSource.events["change"])
+            window[settings.dataSource.events["schange"]]();
+
+      
     };
 
     this.dataSource.read = function () {
@@ -82,127 +87,185 @@ function jondoComboBox(settings) {
             return comboBox.selectedValue
         }
 
-        let listItem = settings.components.li.filter(d => d.value == value)[0];
-        let dataIem = comboBox.dataSource.data.filter(d => d.value == value)[0];
+        let dataIem = settings.items.filter(d => d.value == value)[0];
 
-        if (dataIem)
-        {
-            comboBox.selectedValue = dataIem.value;
+        if (dataIem) {
+            let listItem = settings.components.li.filter(d => d.value == value)[0];
+            settings.selectedValue = dataIem.value;
             settings.components.input.value = dataIem.value;
+            settings.components.input.defaultValue = dataIem.value;
             settings.components.displayInput.value = dataIem.text;
             $(settings.components.li).removeClass("selected");
             $(listItem).addClass("selected");
         }
+      
         return comboBox
     }
 
     if (settings.dataSource)
         comboBox.dataSource.read();
 
-    function CreateUI(settings, dropDownList) {
+    function CreateEvents(settings) {
+
+        let filterFunctions = {};
+        let panelFunctions = {};
+
+        panelFunctions["FadeOut"] = function () {
+            $(settings.components.panel).fadeOut(settings.outAnimation.speed, () => {
+                $(settings.components.container).removeClass("top");
+                $(settings.components.li).show();
+                $(settings.components.container).removeClass("active");
+            });
+        }
+
+        panelFunctions["FadeIn"] = function () {
+            $(settings.components.panel).fadeIn(settings.inAnimation.speed);
+        }
+
+        panelFunctions["SlideIn"] = function () {
+            $(settings.components.panel).slideDown(settings.outAnimation.speed, () => {
+                $(settings.components.container).removeClass("top");
+                $(settings.components.li).show();
+                $(settings.components.container).removeClass("active");
+            });
+        }
+
+        panelFunctions["SlideOut"] = function (value, currentText) {
+            $(settings.components.panel).slideUp(settings.inAnimation.speed);
+        }
+
+        filterFunctions["StartsWith"] = function (value, currentText) {
+            return value.toLowerCase().startsWith(currentText.toLowerCase());
+        }
+
+        filterFunctions["EndsWidth"] = function (value, currentText) {
+            return value.toLowerCase().endsWith(currentText.toLowerCase());
+        }
+
+        filterFunctions["Contains"] = function (value, currentText) {
+            return value.toLowerCase().indexOf(currentText.toLowerCase()) >= 0;
+        }
+
+        settings.events.filter = function (e) {
+            if (event.keyCode === 40 || event.keyCode === 38) {
+                return;
+            } 
+
+            if (!settings.components.panel.isOpen)
+                settings.events.open();
+
+         
+            let showItems = [];
+            let hiddenItems = [];
+            for (var i = 0; i < settings.components.li.length; i++)
+            {
+                if (filterFunctions[settings.filterType](settings.components.li[i].innerHTML, e.currentTarget.value)) {
+                    showItems.push(settings.components.li[i]);
+                    settings.components.li[i].hidden = false;
+                }
+                else {
+                    hiddenItems.push(settings.components.li[i])
+                    settings.components.li[i].true = false;
+                }
+
+            }
+
+            $(showItems).show();
+            $(hiddenItems).hide();
+        }
+
+        settings.events.close = function (e) {
+
+            if (!settings.components.panel.isOpen)
+                return;
+
+            panelFunctions[settings.outAnimation.typeName + "Out"]();
+
+            var item = settings.items.filter(a => a.value == settings.selectedValue);
+
+            $(settings.components.li).show();
+
+            if (item)
+                comboBox.val(settings.selectedValue);
+            else
+                comboBox.val("");
+
+            settings.components.panel.isOpen = false;
+        }
+
+        settings.events.open = function (e) {
+            if (settings.components.panel.isOpen)
+                return;
+
+            let height = window.scrollY + settings.components.container.getBoundingClientRect().top + settings.components.panel.offsetHeight;
+            if (height > window.innerHeight) {
+                $(settings.components.container).addClass("top");
+            }
+            $(settings.components.container).addClass("active");
+            panelFunctions[settings.inAnimation.typeName + "In"]();
+            settings.components.panel.isOpen = true; 
+        }
+
+        settings.events.listitem_mousedown = function (e) {
+            settings.components.displayInput.removeEventListener("blur", settings.events.close);
+        }
+
+        settings.events.listitem_click = function (e) {
+            comboBox.val(e.currentTarget.value);
+            settings.events.close();
+        }
+
+        settings.events.listitem_mouseup = function (e) {
+            settings.components.displayInput.addEventListener("blur", settings.events.close);
+        }
+
+        settings.events.scroll_select = function (e) {
+
+            if (event.keyCode === 9) {
+                settings.events.close();
+                return;
+            }
+
+            if (!settings.components.panel.isOpen)
+                settings.events.open();
+
+            var item = settings.items.filter(a => a.value === settings.selectedValue)[0];
+            index = settings.items.indexOf(item);
+
+            if (event.keyCode === 40) {
+                if (index > settings.items.length)
+                    return;
+                comboBox.val(settings.items[index + 1].value)
+            }
+            else if (event.keyCode === 38) {
+                if (index == 0)
+                    return;
+                comboBox.val(settings.items[index - 1].value)
+            }
+        }
+    }
+
+    function CreateUI(settings) {
 
         settings.components.input = document.getElementById(settings.id);
         settings.components.container = settings.components.input.parentElement;
         settings.components.panel = settings.components.container.getElementsByClassName("j-dropdown-panel")[0];
         settings.components.displayInput = settings.components.container.getElementsByClassName("j-dropdown-input")[0];
 
-        let displayInput = settings.components.displayInput
-        let container = settings.components.container;
-        let panel = settings.components.panel;
+       
+
+        settings.components.panel.isOpen = false;
 
         if(settings.items)
-            settings.components.li = $(settings.components.panel).find('li');
+            settings.components.li = $(panel).find('li');
 
+        $(settings.components.li).on("mousedown", settings.events.listitem_mousedown);
+        $(settings.components.li).on("click", settings.events.listitem_click);
+        $(settings.components.li).on("mouseup", settings.events.listitem_mouseup);
 
-        $(settings.components.li).click(e => {
-            comboBox.val(e.currentTarget.value);
-        });
-
-        displayInput.addEventListener("click", e => {
-            e.stopPropagation();
-            if ($(container).hasClass("active")) {
-                $(container).removeClass("active");
-                $(panel).slideUp(150, () => $(container).removeClass("top"));
-            }
-            else {
-                let height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
-
-                if (height > window.innerHeight) {
-                    $(container).addClass("top");
-                }
-
-                $(container).addClass("active");
-                $(panel).slideDown(150);
-            }
-        });
-
-        $("body").click(e => {
-            if (document.activeElement != null && document.activeElement.id === settings.id)
-                return;
-            $(container).removeClass("active");
-            $(panel).slideUp(150, () => $(container).removeClass("top"));
-        });
-
-        
-        if (settings.filterType === "StartsWith") {
-            displayInput.addEventListener("keyup", e => {
-                e.stopPropagation();
-                let currentText = $(e.currentTarget).val();
-
-                if (currentText === "") {
-                    $(settings.components.li).css("display", "block");
-                    return;
-                }
-
-                for (let i = 0; i < settings.components.li.length; i++) {
-                    if (settings.components.li[i].innerHTML.startsWith(currentText)) {
-                        $(settings.components.li[i]).css("display", "block");
-                    }
-                    else {
-                        $(settings.components.li[i]).css("display", "none");
-                    }
-                }
-            });
-        }
-        else if (settings.filterType === "EndsWidth") {
-            displayInput.addEventListener("keyup", e => {
-                e.stopPropagation();
-                let currentText = $(e.currentTarget).val();
-
-                if (currentText === "") {
-                    $(settings.components.li).css("display", "block");
-                    return;
-                }
-
-                for (let i = 0; i < settings.components.li.length; i++) {
-                    if (settings.components.li[i].innerHTML.endsWith(currentText)) {
-                        $(settings.components.li[i]).css("display", "block");
-                    }
-                    else {
-                        $(settings.components.li[i]).css("display", "none");
-                    }
-                }
-            });
-        }
-        else{
-            displayInput.addEventListener("keyup", e => {
-                e.stopPropagation();
-                let currentText = $(e.currentTarget).val();
-
-                if (currentText === "") {
-                    $(settings.components.li).css("display", "block");
-                    return;
-                }
-
-                for (let i = 0; i < settings.components.li.length; i++) {
-                    if (settings.components.li[i].innerHTML.indexOf(currentText) >= 0) {
-                        $(settings.components.li[i]).css("display", "block");
-                    }
-                    else {
-                        $(settings.components.li[i]).css("display", "none");
-                    }
-                }
-            });
-        }
+        settings.components.displayInput.addEventListener("keydown", settings.events.scroll_select)         
+        settings.components.displayInput.addEventListener("focus", settings.events.open);  
+        settings.components.displayInput.addEventListener("blur", settings.events.close);      
+        settings.components.displayInput.addEventListener("keyup", settings.events.filter)
     }
 }

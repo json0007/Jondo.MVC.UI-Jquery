@@ -1,6 +1,4 @@
-﻿using Jondo.UI;
-using Jondo.UI.Grid;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Text;

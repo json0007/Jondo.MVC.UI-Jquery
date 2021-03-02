@@ -26,9 +26,7 @@ function jondoGrid(settings) {
     var settings = settings;
     settings.filters = {};
     settings.components = {};
-
     buildGridNew(settings);
-
     settings.components.jondoGrid = this;
     settings.components.grid = document.getElementById(settings.id);
     settings.components.table = settings.components.grid.getElementsByTagName("table")[1];
@@ -83,6 +81,9 @@ function jondoGrid(settings) {
 
         if (settings.paging)
             updatePager(total ? total : data.length);
+
+        if (settings.dataSource.events["change"])
+            window[settings.dataSource.events["change"]]();
         
         function updateRecordTotals(total) {
             var span = settings.components.grid.getElementsByClassName("j-grid-total")[0]
@@ -223,6 +224,8 @@ function jondoGrid(settings) {
         enablePaging(settings);
     if (settings.filterable)
         enableFiltering(settings);
+    if (settings.dataSource.autoBind)
+        this.dataSource.read();
 
     function buildGrid(settings) {
 

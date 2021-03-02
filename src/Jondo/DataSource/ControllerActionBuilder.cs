@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jondo.UI.Grid
+namespace Jondo.UI
 {
     public class ControllerActionBuilder
     {

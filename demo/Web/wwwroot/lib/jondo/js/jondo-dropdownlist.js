@@ -4,7 +4,6 @@
     var jondoDropDownListFunctions = {
 
         init: function (settings) {
-
             var ddl = new jondoDropDownList(settings);
             this.data("jondoDropDownList", ddl);
         }
@@ -51,7 +50,7 @@ function jondoDropDownList(settings) {
             dropDownList.components.li.push(li);
         }
 
-        $(dropDownList.components.li).click(e => {
+        $(dropDownList.components.li).on("mousedown", e => {
             dropDownList.val($(e.currentTarget).attr("value"));
         });
 
@@ -126,8 +125,6 @@ function jondoDropDownList(settings) {
             var item = dropDownList.Items.filter(a => a.value === dropDownList.selectedValue)[0];
             index = dropDownList.Items.indexOf(item);
 
-            
-
             if (event.keyCode === 40) {
                 if (index > dropDownList.Items.length)
                     return;
@@ -142,31 +139,22 @@ function jondoDropDownList(settings) {
                 $(container).removeClass("active");
                 $(panel).slideUp(150, () => $(container).removeClass("top"));
             }
-          
-
         });
 
-        displayInput.addEventListener("click", e => {
-            e.stopPropagation();
-          
-            if (!$(container).hasClass("active")) {
-              
-                var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
-          
-                if (height > window.innerHeight) {
-                    $(container).addClass("top");
-                }
+        displayInput.addEventListener("focus", e => {
 
-                $(container).addClass("active");
-                $(panel).slideDown(150);
+            var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
+
+            if (height > window.innerHeight) {
+                $(container).addClass("top");
             }
-            else {
-                $(container).removeClass("active");
-                $(panel).slideUp(150, () => $(container).removeClass("top"));
-            }  
+
+            $(container).addClass("active");
+            $(panel).slideDown(150);
+ 
         });
 
-        $("body").click(() => {
+        displayInput.addEventListener("blur", e => {
             $(container).removeClass("active");
             $(panel).slideUp(150, () => $(container).removeClass("top"));
         });

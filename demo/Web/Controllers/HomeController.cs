@@ -31,6 +31,12 @@ namespace Web.Controllers
             return View(user);
         }
 
+        [HttpPost]
+        public IActionResult DoWork(User user)
+        {
+            return RedirectToAction("Index");
+        }
+
         public IActionResult GetUsers([DataSourceRequest] DataSourceRequest request)
         {
             return Json(DataStore.Users.ToDataSourceResult(request));
