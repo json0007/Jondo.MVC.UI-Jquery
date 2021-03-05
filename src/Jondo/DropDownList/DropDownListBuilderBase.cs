@@ -25,18 +25,12 @@ namespace Jondo.UI
             return (TBuilder)this;
         }
 
-        public TBuilder Animation(Action<AnimationBuilder> config)
+        public TBuilder Animation(Action<DropDownListAnimationBuilder> config)
         {
-            var builder = new AnimationBuilder(Component.InAnimation, Component.OutAnimation);
+            var builder = new DropDownListAnimationBuilder(Component.Animations);
             config.Invoke(builder);
             return (TBuilder)this;
         }
-
-        public TBuilder AnimationSpeed(int speed) {
-            Component.AnimationSpeed = speed;
-            return (TBuilder)this;
-        }
-
 
         public TBuilder DataSource(Action<DataSourceBuilder> configure)
         {
@@ -67,8 +61,6 @@ namespace Jondo.UI
 
         protected override void GenerateHtmlContent()
         {
-
-
             var selectectitem = Component.Items?.FirstOrDefault(a => a.Value == Component.SelectedValue.ToString());
             Builder.Append("<span class='j-dropdown-list'>");
             Builder.Append("<span class='j-dropdown-container'>");

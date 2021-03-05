@@ -76,7 +76,6 @@ function jondoDropDownList(settings) {
         }
     }
 
-  
     this.val = function (value, ignoreChangeEvent) {
 
         if (!value) {
@@ -95,7 +94,6 @@ function jondoDropDownList(settings) {
         }
         return dropDownList;
     }
-
 
     if (settings.dataSource)
         dropDownList.dataSource.read();
@@ -121,14 +119,53 @@ function jondoDropDownList(settings) {
         let container = dropDownList.components.container;
         let panel = dropDownList.components.panel;
 
-        displayInput.addEventListener("keydown", e => {
+        let panelFunctions = {};
+
+        panelFunctions["FadeIn"] = function () {
+
+            var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
+
+            if (height > window.innerHeight) {
+                $(container).addClass("top");
+            }
+            $(dropDownList.components.container).addClass("active");
+            $(dropDownList.components.panel).fadeIn(settings.animations.in.speed);
+        }
+
+        panelFunctions["FadeOut"] = function () {
+            $(dropDownList.components.panel).fadeOut(settings.animations.out.speed, () => {
+                $(dropDownList.components.container).removeClass("top");
+                $(dropDownList.components.container).removeClass("active");
+            });
+        }
+
+        panelFunctions["SlideIn"] = () => {
+
+            var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
+
+            if (height > window.innerHeight) {
+                $(container).addClass("top");
+            }
+            $(dropDownList.components.container).addClass("active");
+            $(dropDownList.components.panel).slideDown(settings.animations.in.speed);
+        }
+
+        panelFunctions["SlideOut"] = () => {
+            $(dropDownList.components.panel).slideUp(settings.animations.out.speed, () => {
+                $(dropDownList.components.container).removeClass("top");
+                $(dropDownList.components.container).removeClass("active");
+            });
+        }        
+
+
+        displayInput.addEventListener("keydown", (event) => {
             var item = dropDownList.Items.filter(a => a.value === dropDownList.selectedValue)[0];
             index = dropDownList.Items.indexOf(item);
 
             if (event.keyCode === 40) {
                 if (index > dropDownList.Items.length)
                     return;
-                dropDownList.val(dropDownList.Items[index +1 ].value)
+                dropDownList.val(dropDownList.Items[index + 1 ].value)
             }
             else if (event.keyCode === 38) {
                 if (index == 0)
@@ -136,28 +173,13 @@ function jondoDropDownList(settings) {
                 dropDownList.val(dropDownList.Items[index - 1].value)
             }
             else if (event.keyCode === 9) {
-                $(container).removeClass("active");
-                $(panel).slideUp(150, () => $(container).removeClass("top"));
+                panelFunctions[settings.animations.out.Name];
             }
         });
 
-        displayInput.addEventListener("focus", e => {
+        displayInput.addEventListener("focus", panelFunctions[settings.animations.in.name]);
 
-            var height = window.scrollY + container.getBoundingClientRect().top + panel.offsetHeight;
-
-            if (height > window.innerHeight) {
-                $(container).addClass("top");
-            }
-
-            $(container).addClass("active");
-            $(panel).slideDown(150);
- 
-        });
-
-        displayInput.addEventListener("blur", e => {
-            $(container).removeClass("active");
-            $(panel).slideUp(150, () => $(container).removeClass("top"));
-        });
+        displayInput.addEventListener("blur", panelFunctions[settings.animations.out.name]);
 
     }
 

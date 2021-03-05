@@ -35,9 +35,14 @@ namespace Jondo.UI
             return new GridBuilder<T>();
         }
 
-        public DropDownListBuilder DropDownList() 
+        public DropDownListBuilder DropDownList()
         {
             return new DropDownListBuilder(new DropDownList());
+        }
+
+        public DropDownListBuilder DropDownList(string name) 
+        {
+            return new DropDownListBuilder(new DropDownList(name));
         }
 
         public ComboBoxBuilder ComboBox()
@@ -59,11 +64,6 @@ namespace Jondo.UI
             var value = expression.Compile().Invoke(_helper.ViewData.Model);
         
             return new ComboBoxBuilder(new ComboBox(name, value));
-        }
-
-        public DropDownListBuilder DropDownList(string name)
-        {
-            return new DropDownListBuilder(new DropDownList(name));
         }
 
         public DropDownListBuilder DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression)

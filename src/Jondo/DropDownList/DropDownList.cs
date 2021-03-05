@@ -27,20 +27,24 @@ namespace Jondo.UI
 
         public object SelectedValue { get; set; }
 
-        public Dictionary<string, string> Events { get; set; } = new Dictionary<string, string>();
+        public Events Events { get; set; } = new Events();
 
         public DataSource DataSource { get; set; }
 
-        public Animation InAnimation { get; set; } = new Animation { Type = AnimationType.Slide, Speed = 150 };
-
-        public Animation OutAnimation { get; set; } = new Animation { Type = AnimationType.Slide, Speed = 150 };
+        public Animations<DropDownListAnimation> Animations { get; set; } = InitAnimations();
 
         public int AnimationSpeed { get; set; } = 150;
-
-
 
         public string CascadeFromId { get; set; }
 
         public IEnumerable<SelectListItem> Items { get; set; }
+
+        private static Animations<DropDownListAnimation> InitAnimations()
+        {
+            var anime = new Animations<DropDownListAnimation>();
+            anime["in"] = new DropDownListAnimation (AnimationType.Slide, AnimationDirection.In, 150);
+            anime["out"] = new DropDownListAnimation(AnimationType.Slide, AnimationDirection.Out, 150);
+            return anime;
+        }
     }
 }

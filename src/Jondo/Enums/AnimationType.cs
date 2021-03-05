@@ -9,4 +9,10 @@ namespace Jondo.Enums
         Slide = 0,
         Fade = 1
     }
+
+    public enum AnimationDirection
+    {
+        In = 0,
+        Out = 1
+    }
 }

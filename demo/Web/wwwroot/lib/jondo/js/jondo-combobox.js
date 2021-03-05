@@ -109,29 +109,28 @@ function jondoComboBox(settings) {
 
         let filterFunctions = {};
         let panelFunctions = {};
-
-        panelFunctions["FadeOut"] = function () {
-            $(settings.components.panel).fadeOut(settings.outAnimation.speed, () => {
-                $(settings.components.container).removeClass("top");
-                $(settings.components.li).show();
-                $(settings.components.container).removeClass("active");
-            });
+        panelFunctions["FadeIn"] = function () {
+            $(settings.components.panel).fadeIn(settings.animations.in.speed);
         }
 
-        panelFunctions["FadeIn"] = function () {
-            $(settings.components.panel).fadeIn(settings.inAnimation.speed);
+        panelFunctions["FadeOut"] = function () {
+            $(settings.components.panel).fadeOut(settings.animations.out.speed, () => {
+                $(settings.components.container).removeClass("top");
+                $(settings.components.container).removeClass("active");
+                $(settings.components.li).show();
+            });
         }
 
         panelFunctions["SlideIn"] = function () {
-            $(settings.components.panel).slideDown(settings.outAnimation.speed, () => {
+            $(settings.components.panel).slideDown(settings.animations.in.speed, () => {
                 $(settings.components.container).removeClass("top");
                 $(settings.components.li).show();
                 $(settings.components.container).removeClass("active");
             });
         }
 
-        panelFunctions["SlideOut"] = function (value, currentText) {
-            $(settings.components.panel).slideUp(settings.inAnimation.speed);
+        panelFunctions["SlideOut"] = function () {
+            $(settings.components.panel).slideUp(settings.animations.out.speed);
         }
 
         filterFunctions["StartsWith"] = function (value, currentText) {
@@ -179,7 +178,7 @@ function jondoComboBox(settings) {
             if (!settings.components.panel.isOpen)
                 return;
 
-            panelFunctions[settings.outAnimation.typeName + "Out"]();
+            panelFunctions[settings.animations.out.name]();
 
             var item = settings.items.filter(a => a.value == settings.selectedValue);
 
@@ -202,7 +201,8 @@ function jondoComboBox(settings) {
                 $(settings.components.container).addClass("top");
             }
             $(settings.components.container).addClass("active");
-            panelFunctions[settings.inAnimation.typeName + "In"]();
+
+            panelFunctions[settings.animations.in.name]();
             settings.components.panel.isOpen = true; 
         }
 
