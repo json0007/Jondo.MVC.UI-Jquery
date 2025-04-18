@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,11 +9,12 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Jondo.UI
 {
-    public static class Extensions
+    public static class IHtmlHelperExtentions
     {
         public static Jondo<TModel> Jondo<TModel>(this IHtmlHelper<TModel> helper)
         {
