@@ -1,2 +1,2 @@
 # Jondo.MVC.UI-Jquery
-ui library for .net core using jquery
+ui library for .net mvc and with jquery
