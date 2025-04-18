@@ -14,7 +14,6 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly DataStore DataStore;
         private readonly ILogger<HomeController> _logger;
 
@@ -57,9 +56,5 @@ namespace Web.Controllers
         {
             return View();
         }
-
-        
-
-
     }
 }

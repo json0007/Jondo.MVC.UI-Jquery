@@ -43,14 +43,11 @@
 
 }
 
-
-
 .j-dropdown-list .j-dropdown-container:after {
     content: "\f078";
     font-family: 'jondo font';
     font-size: 10px;
     position: absolute;
-    top: 5px;
     right: 10px;
 }
 
@@ -73,9 +70,7 @@
         padding: 3px 12px;
         text-decoration: none;
         cursor: pointer;
-
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        width: 200px;
         text-align: left;
     }
 
@@ -93,5 +88,8 @@
     .j-dropdown-list input:focus {
        outline: none;
     }
+
+
+
 
 

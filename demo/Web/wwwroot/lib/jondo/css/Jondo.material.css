@@ -1,0 +1,294 @@
+﻿/* General reset and Material Design typography */
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.j-combobox, .j-dropdown-list {
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    margin: 8px 0;
+}
+
+/* Dropdown container */
+.j-dropdown-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Input styling for both combobox and dropdown */
+.j-dropdown-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Combobox-specific input (text input) */
+.j-combobox .j-dropdown-input[type="text"] {
+    cursor: text;
+}
+
+/* Hover and focus states */
+.j-dropdown-container:hover,
+.j-dropdown-container.active {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.j-dropdown-input:focus {
+    border-bottom: 2px solid #6200ea; /* Material Design purple */
+}
+
+/* Dropdown panel */
+.j-dropdown-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+    /* List styling */
+.j-dropdown-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.j-dropdown-panel li {
+    padding: 12px 16px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+ /* Hover and selected states for list items */
+.j-dropdown-panel li:hover {
+    background: #f5f5f5;
+}
+
+.j-dropdown-panel li.selected {
+    background: #e8eaf6; /* Light purple for selected item */
+    color: #6200ea;
+}
+
+    /* Scrollbar styling for dropdown panel */
+.j-dropdown-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.j-dropdown-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.j-dropdown-panel::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.j-dropdown-panel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Hide hidden inputs */
+input[style="display:none"] {
+    display: none;
+}
+
+
+/* Main grid container */
+.jondo-grid.j-grid {
+    position: relative;
+    margin: 2px 0;
+    background-color: white;
+    border: 1px solid #dedede; /* Matches dropdown panel */
+    border-radius: 5px; /* Matches dropdown panel */
+    overflow: hidden; /* Ensures rounded corners clip content */
+}
+
+/* Header wrapper and header */
+.j-grid-header-wrap {
+    background: #f8f9fa; /* Matches dropdown input background */
+    border-bottom: 1px solid #dedede; /* Matches dropdown panel border */
+    border-radius: 5px 5px 0 0;
+}
+
+.j-grid-header table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.j-grid-header th {
+    padding: 3px 12px; /* Matches dropdown input padding */
+    text-align: left;
+    font-weight: normal; /* Clean look like dropdown */
+    background: #f8f9fa;
+}
+
+    .j-grid-header th a.j-header-text {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+        padding: 2px 5px; /* Matches dropdown li padding */
+        transition: background-color 0.15s ease-in-out; /* Matches dropdown input */
+    }
+
+        .j-grid-header th a.j-header-text:hover {
+            background: #dae0e5; /* Matches dropdown li:hover */
+            cursor: pointer;
+        }
+
+.j-grid-header .col-seperator {
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    background: #dedede; /* Matches dropdown border */
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Grid body */
+.j-grid-body {
+    max-height: 400px; /* Retains your specified height */
+    overflow: auto;
+}
+
+    .j-grid-body table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .j-grid-body tr {
+        transition: background-color 0.15s ease-in-out; /* Matches dropdown input */
+    }
+
+    .j-grid-body td {
+        padding: 2px 5px; /* Matches dropdown li padding */
+        border-bottom: 1px solid #f8f9fa; /* Subtle row separation */
+        text-align: left;
+    }
+
+    .j-grid-body tr:hover {
+        background: #dae0e5; /* Matches dropdown li:hover */
+        cursor: pointer;
+    }
+
+    .j-grid-body tr.selected {
+        background: #dedede; /* Matches dropdown li.selected */
+    }
+
+    .j-grid-body tr:active {
+        background: #d3d9df; /* Matches dropdown input:active */
+    }
+
+    /* Scrollbar styling */
+    .j-grid-body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .j-grid-body::-webkit-scrollbar-thumb {
+        background: #dedede; /* Matches dropdown border */
+        border-radius: 4px;
+    }
+
+        .j-grid-body::-webkit-scrollbar-thumb:hover {
+            background: #dae0e5; /* Matches dropdown hover */
+        }
+
+/* Footer */
+.j-grid-footer {
+    display: flex;
+    align-items: center;
+    padding: 3px 12px; /* Matches dropdown input padding */
+    background: #f8f9fa; /* Matches dropdown input background */
+    border-top: 1px solid #dedede;
+    border-radius: 0 0 5px 5px;
+}
+
+.j-grid-total {
+    flex: 1;
+    font-size: 14px;
+}
+
+.j-pager {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+    /* Pagination buttons */
+    .j-pager .j-pager-item {
+        padding: 3px 12px; /* Matches dropdown input padding */
+        border: 1px solid #f8f9fa; /* Matches dropdown input border */
+        border-radius: 4px; /* Matches dropdown input */
+        background: #f8f9fa;
+        text-decoration: none;
+        color: inherit;
+        font-size: 14px;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; /* Matches dropdown input */
+        cursor: pointer;
+    }
+
+        .j-pager .j-pager-item:hover {
+            background: #e2e6ea; /* Matches dropdown input:hover */
+            border-color: #dae0e5;
+        }
+
+        .j-pager .j-pager-item.selected,
+        .j-pager .j-pager-item:active {
+            background: #d3d9df; /* Matches dropdown input:active */
+            border-color: #d3d9df;
+        }
+
+        .j-pager .j-pager-item.j-state-disabled {
+            background: #f8f9fa;
+            border-color: #f8f9fa;
+            color: #6c757d; /* Subtle disabled state */
+            cursor: not-allowed;
+        }
+
+    /* Pagination icons (jf-icon classes) */
+    .j-pager .jf-icon::after {
+        font-family: 'jondo font'; /* Matches dropdown arrow */
+        font-size: 10px;
+    }
+
+   
+
+/* Page size dropdown (already styled by .j-dropdown-list, but ensure consistency) */
+.j-grid-footer .j-dropdown-list {
+    margin-left: 10px;
+}
+
+    .j-grid-footer .j-dropdown-list a.button {
+        padding: 3px 12px;
+        border: 1px solid #f8f9fa;
+        border-radius: 4px;
+        background: #f8f9fa;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
+
+        .j-grid-footer .j-dropdown-list a.button:hover {
+            background: #e2e6ea;
+            border-color: #dae0e5;
+        }

@@ -125,12 +125,13 @@ function jondoComboBox(settings) {
             $(settings.components.panel).slideDown(settings.animations.in.speed, () => {
                 $(settings.components.container).removeClass("top");
                 $(settings.components.li).show();
-                $(settings.components.container).removeClass("active");
-            });
+               
+            }); $(settings.components.container).removeClass("active");
         }
 
         panelFunctions["SlideOut"] = function () {
             $(settings.components.panel).slideUp(settings.animations.out.speed);
+            $(settings.components.container).removeClass("active");
         }
 
         filterFunctions["StartsWith"] = function (value, currentText) {
