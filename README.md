@@ -5,10 +5,3 @@ This is meant to mimic Kendo.UI for MVC with Jquery. Kendo is too expensive and 
 
 This is meant to be an open source project. Feel free to use it as you wish.  
 
-It exists in two main parts.  Server side code, and client side code.  Server side code is responsible for creating UI elements and binding them to your MVC data model and client side code is responsible for how those elements react one they are created
-
-Server Side Code
-
-IHTMLHelper and the builder pattern
-
-.NET MVC UI is reliant on the IHTMLHelper interface. This interface is what razor pages uses to create the UI elements. Elements are built using a builder pattern 
