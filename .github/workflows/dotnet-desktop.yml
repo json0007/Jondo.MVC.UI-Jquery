@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: .NET 8 CI Pipeline
 
 on:
   pull_request:
@@ -13,8 +13,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v2
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x'
 
