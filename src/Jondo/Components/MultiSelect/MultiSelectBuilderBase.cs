@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Jondo.MultiSelect
 {
-    public class MultiSelectDropDownListBuilderBase<TComponent, TBuilder> : WidgetBuilderBase<TComponent>
-        where TBuilder : MultiSelectDropDownListBuilderBase<TComponent, TBuilder>
-        where TComponent : MultiSelectDropDownList
+    public class MultiSelectBuilderBase<TComponent, TBuilder> : WidgetBuilderBase<TComponent>
+        where TBuilder : MultiSelectBuilderBase<TComponent, TBuilder>
+        where TComponent : MultiSelect
     {
-        public MultiSelectDropDownListBuilderBase(TComponent component) : base(component) { }
+        public MultiSelectBuilderBase(TComponent component) : base(component) { }
 
         protected override void GenerateHtmlContent()
         {
