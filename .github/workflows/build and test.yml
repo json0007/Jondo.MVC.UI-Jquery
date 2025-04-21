@@ -28,7 +28,7 @@ jobs:
         run: dotnet test --configuration Release --collect:"XPlat Code Coverage"
 
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
           path: '**/coverage.cobertura.xml'
