@@ -140,7 +140,7 @@
 
 
 .j-grid > .j-grid-header-wrap > .j-grid-header {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .j-grid > .j-grid-header-wrap > .j-grid-header > table {

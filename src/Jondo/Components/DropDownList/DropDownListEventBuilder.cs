@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace Jondo.DropDownList
+namespace Jondo.UI
 {
     public class DropDownListEventBuilder
     {
@@ -17,6 +17,11 @@ namespace Jondo.DropDownList
 
         public void OnSelect(string function)
         {
+            if(!function.EndsWith("()"))
+            {
+                function = $"{function}()";
+            }
+
             component.Add("onselect", function);
         }
     }

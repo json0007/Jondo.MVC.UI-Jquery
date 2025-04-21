@@ -1,0 +1,95 @@
+﻿.j-dropdown-list {
+   position:relative;
+   margin:2px 0px;
+}
+
+.j-dropdown-list select {
+    display: none;
+}
+
+.j-dropdown-list ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.j-dropdown-list li {
+    text-align: left;
+    padding: 2px 5px;
+}
+
+.j-dropdown-list li:hover {
+    cursor:pointer;
+    background:#dae0e5;
+}
+
+.j-dropdown-list li.selected
+{
+    background: #dedede;
+}
+
+.j-dropdown-list .j-dropdown-panel {
+    display:none;
+    left:0;
+    top:25px;
+    right:0;
+    z-index:100;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #dedede;
+    border-radius: 5px 5px 5px 5px;
+    max-height:175px;
+    overflow:auto;
+
+}
+
+.j-dropdown-list .j-dropdown-container:after {
+    content: "\f078";
+    font-family: 'jondo font';
+    font-size: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+.j-dropdown-list.top {
+    bottom: 25px;
+    top: unset;
+}
+
+.j-dropdown-list.active button:hover {
+    border: #f8f9fa;
+    background: #f8f9fa;
+}
+
+    .j-dropdown-list input {
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: solid 1px #f8f9fa;
+        background: #f8f9fa;
+        padding: 3px 12px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        text-align: left;
+    }
+
+
+.j-dropdown-list input:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.j-dropdown-list input:active {
+    background-color: #dae0e5;
+    border-color: #d3d9df;
+}
+
+    .j-dropdown-list input:focus {
+       outline: none;
+    }
+
+
+
+
+

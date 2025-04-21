@@ -1,0 +1,97 @@
+﻿.j-combobox {
+   position:relative;
+   margin:2px 0px;
+}
+
+.j-combobox select {
+    display: none;
+}
+
+.j-combobox ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.j-combobox li {
+    text-align: left;
+    padding: 2px 5px;
+}
+
+.j-combobox li:hover {
+    cursor:pointer;
+    background:#dae0e5;
+}
+
+.j-combobox li.selected
+{
+    background: #dedede;
+}
+
+.j-combobox .j-dropdown-panel {
+    display:none;
+    left:0;
+    top:25px;
+    right:0;
+    z-index:100;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #dedede;
+    border-radius: 5px 5px 5px 5px;
+    max-height:175px;
+    overflow:auto;
+
+}
+
+.j-combobox .j-dropdown-container:after {
+    content: "\f078";
+    font-family: 'jondo font';
+    font-size: 10px;
+    position:absolute;
+    top:5px; 
+    right:10px;
+}
+
+.j-combobox.top {
+    bottom: 25px;
+    top: unset;
+}
+
+.j-combobox.active button:hover {
+    border: #f8f9fa;
+    background: #f8f9fa;
+}
+
+.j-combobox input {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #f8f9fa;
+    background: #f8f9fa;
+    padding: 3px 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.j-combobox input:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.j-combobox input:focus {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.j-combobox input:active {
+    background-color: #dae0e5;
+    border-color: #d3d9df;
+}
+
+.j-combobox input:focus {
+    outline: none;
+}
+
+

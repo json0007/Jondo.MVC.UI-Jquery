@@ -14,27 +14,40 @@
 }
 <script src="~/lib/jondo/js/jondo-combobox.js"></script>
 <script>
-    function DoSomething() {
+    function doSomething(e) {
         alert("I did something");
+    }
+
+    function clientSideEvent() {
+        var combobox = $("#comboBox").data("jondoComboBox");
+        console.log(combobox.val());
     }
 </script>
 <form asp-action="DoWork" method="post">
-
+    <h4>Jondo Combobox</h4>
 
     @(Html.Jondo().ComboBoxFor(a => a.OptionId)
+    .Name("comboBox")
     .FilterType(FilterTypes.Contains)
     .Animation(a => a.FadeIn(150).SlideOut(150))
     .DataSource(a => a.Read("Home", "GetDropDownList")))
 
-
-    @(Html.Jondo().DropDownList("ddl")
+    <br />
+    <h4>Jondo Drop Down List</h4>
+    @(Html.Jondo().DropDownListFor(a => a.OptionId)
+    .Name("ddl")
     .Animation(a => a.FadeIn(150).SlideOut(150))
     .DataSource(a => a.Read("Home", "GetDropDownList")
-    .Events(a => a.OnChange("DoSomething"))))
-    <input type="submit" value="submit"/>
+    .Events(a => a.OnChange("doSomething"))))
 
 
+
+    <input type="submit" value="submit server event" class="j-btn j-btn-primary"/>
+    <input type="button" onclick="clientSideEvent()" value="Submit Client Event" class="j-btn j-btn-secondary" />
 </form>
+
+
+
 
 <h4>This is a demo of the jondo Grid</h4>
 

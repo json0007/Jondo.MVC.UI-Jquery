@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Jondo.MultiSelect
 {
-    public class MultiSelectDropDownList : WidgetBase
+    public class MultiSelect : WidgetBase
     {
+        public MultiSelect() { }
+        public MultiSelect(string id) 
+        {
+            Id = id;
+        }
         public string Id { get; set; }
         
         public List<object> SelectedValue { get; set; }
